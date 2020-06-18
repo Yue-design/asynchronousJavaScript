@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Asynchronous JavaScript</title>
+</head>
+<body>
+    <h1>from callback to promises</h1>
+    <script>
+    // pending --> event happens --> settled/resolved
+    const getIDs = new Promise((resolve, reject) => {
+        setTimeout(() => { // the function is used as a AJAX call
+            resolve([111, 222, 333, 444]);
+        }, 1500);    
+    });
+
+    const getRecipe = recID => {
+        return new Promise((resolve, reject) => {
+            setTimeout(ID => {
+                const recipe = {title: 'Fresh Tomato Pasta', publisher: 'Jonas'};
+                resolve(`${id} : ${recipe.title}`);
+            }, 1500, recID);
+        });
+    };
+
+    const getRelated = publisher => {
+        return new Promise((resolve, reject) => {
+            setTimeout(pub => {
+                const recipe = {title: 'Italian Pizza', publisher: 'Jonas'};
+                resolve(`${pub} : ${recipe.title}`);
+            }, 1500, publisher);
+        })
+    };
+
+    getIDs
+    .then(IDs => { // add an event handler
+        console.log(IDs);
+        return getRecipe(ID[2]); // a promise by chaining
+    })  
+    .then(recipe => { // chaining with a return statement
+        console.log(recipe); // 
+        return getRelated('Jonas'); // undefined: [object, object]
+    })           
+    .then(recipe => {
+        console.log(recipe);
+    })          
+    .catch(error => {
+        console.log('Error!!');
+    });
+    </script>
+</body>
+</html>

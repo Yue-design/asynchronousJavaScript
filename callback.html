@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Asynchronous JavaScript</title>
+</head>
+<body>
+    <h1>callback: the old way</h1>
+    <script>
+        // the triangular shape is a sign of call back hell
+        function getRecipe() { // now we have three callbacks nested inside one another
+            setTimeout(() => {
+                const recipeID = [111, 222, 333, 444];
+                console.log(recipeID);
+
+                setTimeout((id) => {
+                    const recipe = {title: 'Fresh Tomato Pasta', publisher: 'Jonas'};
+                    console.log(`${id} : ${recipe.title}`);
+
+                    setTimeout(publisher => { // the parenthesis is optional 
+                                          // when the function only pass one argument
+                        const recipe2 = {title: 'Italian Pizza', publisher: 'Jonas'};
+                        console.log(recipe);
+                    }, 1500, recipe.publisher);
+
+                }, 1000, recipeID[2]);
+
+            }, 1500);
+        }
+        getRecipe();
+    </script>
+</body>
+</html>
